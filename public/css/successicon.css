@@ -1,17 +1,16 @@
 .dummy-positioning {
   width: 100%;
-  height: 100vh;
+  height: 100%;
   align-items: center;
   justify-content: center;
 }
 .success-icon {
   display: inline-block;
-  width: 8em;
-  height: 8em;
+  width: 100%;
+  height: 100%;
   font-size: 20px;
   border-radius: 50%;
-  border: 4px solid #96df8f;
-  background-color: #fff;
+  border: 4px solid #2d9962;
   position: relative;
   overflow: hidden;
   transform-origin: center;
@@ -20,27 +19,33 @@
 
 .success-icon__tip,
 .success-icon__long {
-  display: block;
   position: absolute;
   height: 4px;
-  background-color: #96df8f;
-  border-radius: 10px;
+  background: #2d9962;
+  visibility: hidden;
 }
 
 .success-icon__tip {
-  width: 2.4em;
-  top: 4.3em;
-  left: 1.4em;
+  top: 50%;
+  left: 15%;
+  width: 30%;
   transform: rotate(45deg);
-  visibility: hidden;
 }
 .success-icon__long {
-  width: 4em;
+  top: 45%;
+  left: 30%;
+  width: 50%;
   transform: rotate(-45deg);
-  top: 3.7em;
-  left: 2.75em;
-  visibility: hidden;
 }
+.success-icon__tip.final {
+  top: 56%;
+  left: 20%;
+}
+.success-icon__long.final {
+  top: 50%;
+  left: 36%;
+}
+
 .success-icon.active {
   animation: showSuccess 180ms ease-in-out;
   transform: scale(1);
@@ -67,26 +72,18 @@
 @keyframes tipInPlace {
   from {
     width: 0em;
-    top: 0em;
-    left: -1.6em;
   }
   to {
-    width: 2.4em;
-    top: 4.3em;
-    left: 1.4em;
+    width: 30%;
     visibility: visible;
   }
 }
 @keyframes longInPlace {
   from {
     width: 0em;
-    top: 5.1em;
-    left: 3.2em;
   }
   to {
-    width: 4em;
-    top: 3.7em;
-    left: 2.75em;
+    width: 50%;
     visibility: visible;
   }
 }

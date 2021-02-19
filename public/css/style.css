@@ -2,11 +2,13 @@
 :root {
   --orange: #ff7e0b;
   --dimorange: #ca650d;
-  --textcolor_secondary: #929292;
+  --textcolor_secondary: #a8a8a8;
   --textcolor_primary: #c2c2c2;
+  --textcolor_final: #ea910f;
   --bg1: #192135;
   --bg2: #111829;
   --bg3: #192135;
+  --cardsbg: rgb(35, 44, 66);
 }
 * {
   padding: 0;
@@ -311,7 +313,8 @@
   width: 100%;
   height: 70%;
   /* background: rgba(0, 0, 0, 0.2); */
-  background: linear-gradient(135deg, rgb(13 30 80), rgb(76 91 128));
+  /* background: linear-gradient(135deg, rgb(13 30 80), rgb(76 91 128)); */
+  background: var(--cardsbg);
   border-radius: 30px;
   position: relative;
   overflow: hidden;
@@ -403,12 +406,13 @@
   font-size: 1.1rem;
   padding: 20px 40px;
   text-align: left;
-  color: rgb(255 255 255 / 22%);
+  /* color: rgb(255 255 255 / 22%); */
+  color: var(--textcolor_secondary);
 }
 .phase1 .sidecart .cartinfo {
   width: 100%;
   height: 25%;
-  background: linear-gradient(45deg, rgb(13 30 80), rgb(76 91 128));
+  background: var(--cardsbg);
   border-radius: 30px;
   position: relative;
   padding: 30px 20px;
@@ -501,7 +505,8 @@
 .phase2 .cover.top {
   width: 100%;
   height: 70%;
-  background: linear-gradient(215deg, rgb(13 30 80), rgb(76 91 128));
+  /* background: linear-gradient(215deg, rgb(13 30 80), rgb(76 91 128)); */
+  background: var(--cardsbg);
   display: flex;
   justify-content: center;
   align-items: space-between;
@@ -512,6 +517,15 @@
 .phase2 .cover .covercontainer {
   width: 50%;
   height: 100%;
+  position: relative;
+}
+.phase2 .cover .covercontainer .addoption {
+  position: absolute;
+  top: 24px;
+  right: 9px;
+  color: var(--textcolor_secondary);
+  font-size: 11px;
+  opacity: 0.5;
 }
 .phase2 .cover .address {
   border-right: 1px solid #121212;
@@ -522,13 +536,15 @@
   font-size: 1.1rem;
   padding: 20px 50px;
   text-align: center;
-  color: rgb(255 255 255 / 22%);
+  color: var(--textcolor_secondary);
 }
 .phase2 .cover .covercontainer .cardcontainer {
   width: 100%;
   height: 100%;
   overflow: hidden;
+  position: relative;
 }
+
 .phase2 .cover .covercontainer .cardcontainer .glasses {
   width: 104%;
   height: 100%;
@@ -601,7 +617,8 @@
   width: 20%;
   flex-direction: column;
   height: 100%;
-  padding: 30px 25px 20px 0px;
+  padding: 30px 25px 30px 0px;
+  opacity: 0.7;
 }
 .phase2 .cover .covercontainer .cardcontainer .glass .logo img {
   opacity: 0.9;
@@ -616,5 +633,158 @@
 .phase2 .cover.bottom {
   width: 100%;
   height: 25%;
-  background: linear-gradient(330deg, rgb(13 30 80), rgb(76 91 128));
+  /* background: linear-gradient(330deg, rgb(13 30 80), rgb(76 91 128)); */
+  background: var(--cardsbg);
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  overflow: hidden;
+}
+.phase2 .cover.bottom .final {
+  width: 33.33%;
+  height: 100%;
+  background: transparent;
+  border-right: 1px solid var(--bg2);
+  transform: translateX(150px);
+  opacity: 0;
+  transition: 0.5s;
+  display: flex;
+  justify-content: space-evenly;
+  flex-direction: column;
+  align-items: flex-start;
+  padding: 20px;
+  position: relative;
+}
+.phase2 .cover.bottom .final h4 {
+  color: var(--textcolor_primary);
+}
+.phase2 .cover.bottom .final .details {
+  color: var(--textcolor_final);
+  font-size: 18px;
+  width: 100%;
+}
+.phase2 .cover.bottom .final .loader {
+  position: absolute;
+  top: 30%;
+  right: 20px;
+  transform: translateY(-50%);
+  width: 40px;
+  height: 40px;
+}
+.phase2 .cover.bottom .final.active {
+  transform: translateX(0px);
+  opacity: 1;
+}
+.phase2 .cover.bottom .final .details label {
+  font-size: 12px;
+}
+.phase2 .cover.bottom .final .details .cvvinput {
+  display: inline-block;
+  width: 70px;
+  background: transparent;
+  outline: none;
+  border: none;
+  border-bottom: 1px solid var(--textcolor_final);
+  letter-spacing: 5px;
+  padding: 0px 15px 5px 15px;
+  color: var(--textcolor_final);
+}
+.phase2 .cover.bottom .final .details .placeorderbtn {
+  background: transparent;
+  outline: none;
+  border: none;
+  display: block;
+  padding: 9px;
+  margin-top: 11px;
+  border-radius: 15px;
+  border: 1px solid var(--textcolor_final);
+  color: var(--textcolor_final);
+  width: 100%;
+  cursor: pointer;
+  position: relative;
+  font-size: 15px;
+  overflow: hidden;
+  z-index: 1;
+}
+.phase2 .cover.bottom .final .details .placeorderbtn .bgholder {
+  position: absolute;
+  width: 100%;
+  height: 100%;
+  top: 0;
+  left: -100%;
+  transition: 0.3s;
+  background: var(--textcolor_final);
+  z-index: -1;
+}
+.phase2 .cover.bottom .final .details .placeorderbtn.success {
+  border: 1px solid #2d9962;
+}
+.phase2 .cover.bottom .final .details .placeorderbtn.success .bgholder {
+  background: #2d9962;
+}
+
+.phase2 .cover.bottom .final .details .placeorderbtn:hover {
+  color: #fff;
+}
+.phase2 .cover.bottom .final .details .placeorderbtn:hover .bgholder {
+  left: 0%;
+}
+.phase2 .cover.bottom .final .details .placeorderbtn.active {
+  color: #fff;
+}
+.phase2 .cover.bottom .final .details .placeorderbtn.active .bgholder {
+  left: 0%;
+}
+
+.maincontainer .subcontainer .phase.phase3 {
+  width: 100%;
+  background: var(--bg2);
+  z-index: 10;
+  top: 0;
+  transition: 0.4s;
+  padding: 25px 25px 25px 0px;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+.phase3.activate {
+  right: 0;
+  opacity: 1;
+}
+.phase3.deactivate {
+  right: -100%;
+  opacity: 0;
+  /* right: 0%;
+  opacity: 1; */
+}
+.phase3 .greeting {
+  width: 100%;
+  height: 40%;
+  display: flex;
+  justify-content: space-evenly;
+  align-items: center;
+  flex-direction: column;
+}
+.phase3 .greeting h2 {
+  color: #2d9962;
+}
+.phase3 .greeting .loaderholder {
+  width: 100px;
+  height: 100px;
+}
+.phase3 .greeting button {
+  color: #2d9962;
+  background: transparent;
+  outline: none;
+  border: none;
+  padding: 12px;
+  border-radius: 10px;
+  border: 1px solid #2d9962;
+  cursor: pointer;
+  font-size: 15px;
+  transition: 0.2s;
+}
+.phase3 .greeting button:hover {
+  background: #2d9962;
+  color: #fff;
 }

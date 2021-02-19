@@ -9,14 +9,29 @@ const phase2 = document.querySelector('.phase2');
 const checkoutButton = document.querySelector('#checkout_button');
 
 const restartEverything = () => {
+    $('.cartitems').find('.item').remove();
+    $('#totalprice').text(0);
+    checkoutButton.innerHTML = "Checkout";
+    $('.phase3').removeClass('activate');
+    $('.phase3').addClass('deactivate');
+    setTimeout(()=>{
+        phase2.classList.remove('activate')
+        phase2.classList.add('deactivate');
+        setTimeout(()=>{
+            phase1.classList.remove('deactivate')
+            phase1.classList.add('activate')    
+        },550);
+    },550)
     
+}
+
+const cancelPurchasee = () => {
     phase2.classList.remove('activate')
     phase2.classList.add('deactivate');
     setTimeout(()=>{
         phase1.classList.remove('deactivate')
         phase1.classList.add('activate')    
     },200);
-    
 }
 const activatePase2 = () => {
     phase1.classList.remove('activate')
@@ -34,7 +49,7 @@ checkoutButton.addEventListener('click',(e)=>{
         checkoutButton.innerHTML = "Cancel";
         checkoutButton.setAttribute('attr-isFullyOpened','false')
     }else{
-        restartEverything();
+        cancelPurchasee();
         checkoutButton.innerHTML = "Checkout" 
         checkoutButton.setAttribute('attr-isFullyOpened','true')
     }
@@ -165,8 +180,84 @@ VanillaTilt.init(document.querySelectorAll(".glass"), {
     "max-glare":  0.5, 
 });
 
-document.querySelectorAll(".glass").forEach(gls => {
+
+const clearExistingAddGlassActivePosition = () => {
+    document.querySelectorAll(".add_glass").forEach(addgls => {
+        addgls.classList.remove('active')
+    });
+}
+const clearExistingPayGlassActivePosition = () => {
+    document.querySelectorAll(".pay_glass").forEach(paygls => {
+        paygls.classList.remove('active')
+    });
+}
+
+document.querySelectorAll(".add_glass").forEach(gls => {
     gls.addEventListener("click",()=>{
-        gls.classList.add('active')
+        clearExistingAddGlassActivePosition()
+        gls.classList.add('active');
+
+        const uname = $(gls).find('.carddetails').find('.uname').text();
+        const address1 = $(gls).find('.bottom').find('h5').text();
+        address2 = $(gls).find('.bottom').find('.city').text();
+        address2 = address2+" - "+ $(gls).find('.bottom').find('.pin').text();
+
+        $('.final_address').find('.name').html(uname)
+        $('.final_address').find('.fulladdress1').html(address1);
+        $('.final_address').find('.fulladdress2').html(address2);
+        $('.final_address').addClass('active');
+        setTimeout(()=>{
+            $('.success-icon.addressbook').addClass('active');
+        },600)
     })
+})
+document.querySelectorAll(".pay_glass").forEach(gls => {
+    gls.addEventListener("click",()=>{
+        clearExistingPayGlassActivePosition()
+        gls.classList.add('active');
+        const card_type = $(gls).find('.carddetails').find('h2').text();
+        const card_number = $(gls).find('.bottom').find('h5').text();
+        const card_name = $(gls).find('.bottom').find('.uname').text();
+
+        $('.final_payment').find('.ctype').html(card_type)
+        $('.final_payment').find('.cnumber').html(card_number);
+        $('.final_payment').find('.cdate').html(card_name);
+        $('.final_payment').addClass('active');
+        setTimeout(()=>{
+            $('.success-icon.paymentbook').addClass('active')
+        },600)
+        setTimeout(()=>{
+            $('.final_order').addClass('active')
+        },1500)
+    })
+})
+
+
+const placeOrderButton = document.querySelector('.placeorderbtn')
+placeOrderButton.addEventListener('click',() => {
+    placeOrderButton.classList.add('active');
+    $(placeOrderButton).find('.placeorderbtntext').text('Please Wait...');
+    setTimeout(()=>{
+        $('.cvvbook').addClass('active');
+        $(placeOrderButton).find('.placeorderbtntext').text('Order Confirmed');
+        placeOrderButton.classList.add('success');
+        setTimeout(()=>{
+            $('.phase3').removeClass('deactivate');
+            $('.phase3').addClass('activate');
+            setTimeout(()=>{
+                $('.finalloader').addClass('active');
+                clearExistingAddGlassActivePosition();
+                clearExistingPayGlassActivePosition();
+                $('.final_address').removeClass('active');
+                $('.final_payment').removeClass('active');
+                $('.final_order').removeClass('active')
+            },1000);
+        },2000);
+    },2000)
+});
+
+
+const resetAllButton = document.querySelector('.reset');
+resetAllButton.addEventListener('click',()=>{
+    restartEverything()
 })

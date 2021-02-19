@@ -1,1 +1,4 @@
-# cartapplication
+commands
+	
+	npm install
+	npm start
